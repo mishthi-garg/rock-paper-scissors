@@ -23,45 +23,76 @@
   <button onclick="
     playGame('scissors');
   "> Scissors </button>
+  <button onclick="
+    updateScore('reset');
+  "> Reset Score </button>
+
+
   <script>
+
+    let score = {
+      wins: 0,
+      losses: 0,
+      ties: 0
+    };
 
     function playGame(playerMove){
       const compMove = playCompMove();
       let result = '';
       if(playerMove === 'rock'){
         if(compMove === 'rock'){
-          result = `Computer picked rock. It's a tie!`;
+          result = `It's a tie!`;
         }
         else if(compMove === 'paper'){
-          result = 'Computer picked paper. You Lose!';
+          result = 'You Lose!';
         }
         else{
-          result = 'Computer picked scissors. You Win!';
+          result = 'You Win!';
         }        
       }
       else if(playerMove === 'paper'){
         if(compMove === 'paper'){
-        result = `Computer picked paper. It's a tie!`;
+        result = `It's a tie!`;
         }
         else if(compMove === 'scissors'){
-          result = 'Computer picked scissors. You Lose!';
+          result = 'You Lose!';
         }
         else{
-          result = 'Computer picked rock. You Win!';
+          result = 'You Win!';
         }
       }
       else{
         if(compMove === 'scissors'){
-          result = `Computer picked scissors. It's a tie!`;
+          result = `It's a tie!`;
         }
         else if(compMove === 'rock'){
-          result = 'Computer picked rock. You Lose!';
+          result = 'You Lose!';
         }
         else{
-          result = 'Computer picked paper. You Win!';
+          result = 'You Win!';
         }
       }
-      console.log(result);
+      updateScore(result);
+      console.log(`Computer picked ${compMove}. You picked ${playerMove}. ${result}`);
+      console.log(score);
+    }
+
+    function updateScore(result){
+      if(result === 'reset'){
+        score = {wins:0, losses: 0, ties: 0};
+        console.log('Score reset');
+        console.log(score);
+        return;
+      }
+      if(result === `It's a tie!`){
+        score.ties++;
+      }
+      else if(result === 'You Win!'){
+        score.wins++;
+      }
+      else{
+        score.losses++;
+      }
     }
 
     function playCompMove(){
