@@ -26,6 +26,11 @@
     "> <img class="move-img" src="move-images/scissors-emoji.png"> </button>
   </div>
 
+  <p class="js-result"></p>
+  <p class="js-moves"></p>
+  <p class="js-score"></p>
+  
+
   <button onclick="
     updateScore('reset');
   "> Reset Score </button>
@@ -35,6 +40,8 @@
 
     let score = JSON.parse(localStorage.getItem('score')) || {wins:0, losses:0, ties:0};
     console.log(score);
+
+    document.querySelector('.js-score').innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 
     function playGame(playerMove){
       const compMove = playCompMove();
@@ -72,9 +79,20 @@
           result = 'You Win!';
         }
       }
+
       updateScore(result);
+      updateScoreElements();
+
+      document.querySelector('.js-moves').innerHTML = `You <img class="move-img" src="move-images/${playerMove}-emoji.png">  <img class="move-img" src="move-images/${compMove}-emoji.png"> Computer`;
+
+      document.querySelector('.js-result').innerHTML = `${result}`;
+
       console.log(`Computer picked ${compMove}. You picked ${playerMove}. ${result}`);
       console.log(score);
+    }
+
+    function updateScoreElements(){
+      document.querySelector('.js-score').innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
     }
 
     function updateScore(result){
@@ -82,6 +100,9 @@
         score = {wins:0, losses: 0, ties: 0};
         console.log('Score reset');
         console.log(score);
+
+        updateScoreElements();
+
         localStorage.removeItem('score');
         return;
       }
