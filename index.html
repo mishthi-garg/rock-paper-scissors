@@ -12,17 +12,20 @@
   <p>
     Rock Paper Scissors
   </p>
-  <button onclick="
-    playGame('rock');
-  ">
-    Rock
-  </button>
-  <button onclick="
-    playGame('paper');
-  "> Paper </button>
-  <button onclick="
-    playGame('scissors');
-  "> Scissors </button>
+  <div class="moves">
+    <button class="move-button" onclick="
+      playGame('rock');
+    ">
+      <img class="move-img" src="move-images/rock-emoji.png">
+    </button>
+    <button class="move-button" onclick="
+      playGame('paper');
+    "> <img class="move-img" src="move-images/paper-emoji.png"> </button>
+    <button class="move-button" onclick="
+      playGame('scissors');
+    "> <img class="move-img" src="move-images/scissors-emoji.png"> </button>
+  </div>
+
   <button onclick="
     updateScore('reset');
   "> Reset Score </button>
