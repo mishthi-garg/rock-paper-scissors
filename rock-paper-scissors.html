@@ -30,11 +30,8 @@
 
   <script>
 
-    let score = {
-      wins: 0,
-      losses: 0,
-      ties: 0
-    };
+    let score = JSON.parse(localStorage.getItem('score')) || {wins:0, losses:0, ties:0};
+    console.log(score);
 
     function playGame(playerMove){
       const compMove = playCompMove();
@@ -82,6 +79,7 @@
         score = {wins:0, losses: 0, ties: 0};
         console.log('Score reset');
         console.log(score);
+        localStorage.removeItem('score');
         return;
       }
       if(result === `It's a tie!`){
@@ -93,6 +91,7 @@
       else{
         score.losses++;
       }
+      localStorage.setItem('score',JSON.stringify(score));
     }
 
     function playCompMove(){
