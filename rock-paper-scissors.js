@@ -55,6 +55,15 @@ let score = JSON.parse(localStorage.getItem('score')) || {wins:0, losses:0, ties
       document.querySelector('.js-score').innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
     }
 
+    function resetConfirmation(){
+      document.querySelector('.confirmReset').innerHTML = `
+          Are you sure you want to reset the score <button onclick="updateScore('reset');
+          document.querySelector('.confirmReset').innerHTML = '';">Yes</button> <button onclick="
+            document.querySelector('.confirmReset').innerHTML = '';
+          ">No</button>
+        `;
+    }
+
     function updateScore(result){
       if(result === 'reset'){
         score = {wins:0, losses: 0, ties: 0};
@@ -92,3 +101,9 @@ let score = JSON.parse(localStorage.getItem('score')) || {wins:0, losses:0, ties
       }
       return compMove;
     }
+
+    document.addEventListener('keydown', (event) => {
+      if(event.key === 'Backspace') {
+        resetConfirmation();
+      }
+    });
